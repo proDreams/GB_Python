@@ -4,4 +4,7 @@
 # - 5 -> нет
 # - 0,34 -> 3
 
-print(int((float(input("Введите число: ")) * 10) % 10))
+# print(int(float(input("Введите число: ")) * 10) % 10)
+
+num = input().split('.')
+print(num[1][0])
