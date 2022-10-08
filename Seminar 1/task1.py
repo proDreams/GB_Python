@@ -8,6 +8,6 @@
 num_a = int(input("Введите первое число: "))
 num_b = int(input("Введите второе число: "))
 if num_a == num_b * num_b or num_b == num_a * num_a:
-    print(f"Число {num_a} является квадратом {num_b}")
+    print(f"Число {max((num_a, num_b))} является квадратом {min(num_a, num_b)}")
 else:
-    print(f"Число {num_a} не является квадратом {num_b}")
+    print(f"Число {max((num_a, num_b))} не является квадратом {min(num_a, num_b)}")
