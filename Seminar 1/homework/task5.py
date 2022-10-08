@@ -21,7 +21,6 @@
 # str_d = str(d).split('.')
 # print(str_d[0] + '.' + str_d[1][:2])
 
-
 # Второй вариант
 x1, y1 = [int(i) for i in input("Введите координаты точки А через пробел: ").split()]
 x2, y2 = [int(i) for i in input("Введите координаты точки B через пробел: ").split()]
