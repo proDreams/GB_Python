@@ -17,5 +17,5 @@ print(*[f'x = {x}, y = {y}, z = {z} = Утверждение верно' if not 
 
 # Третий вариант - почище, с использованием all()
 print('Утверждение верно для всех предикат' if all(
-    [not (x or y or z) == (not x and not y and not z) for z in range(2) for y in range(2) for x in
-     range(2)]) else 'Утверждение не верно')
+    not (x or y or z) == (not x and not y and not z) for z in range(2) for y in range(2) for x in
+     range(2)) else 'Утверждение не верно')
