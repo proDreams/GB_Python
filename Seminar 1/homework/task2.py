@@ -14,7 +14,29 @@ for i in result_list:
 else:
     print("Утверждение верно")
 
-# print('Утверждение верно' if not (0 or 0 or 0) == (not 0 and not 0 and not 0) else 'Утверждение не верно')
+# Первый вариант по другому
+reference = True
+for x in range(2):
+    for y in range(2):
+        for z in range(2):
+            if (not (x or y or z) == (not x and not y and not z)) != reference:
+                print("Утверждение не верно")
+                break
+else:
+    print("Утверждение верно")
+
+# Первый вариант с проверкой "на лету"
+reference = True
+for x in range(2):
+    for y in range(2):
+        for z in range(2):
+            if (not (x or y or z) == (not x and not y and not z)) != reference:
+                reference = False
+                break
+print(reference)
+
+# Проверка предиката в одну строку
+print('Утверждение верно' if not (0 or 0 or 0) == (not 0 and not 0 and not 0) else 'Утверждение не верно')
 
 # Второй вариант - очень страшный и ни разу не изящный в одну строку
 print(*[f'x = {x}, y = {y}, z = {z} = Утверждение верно' if not (x or y or z) == (
