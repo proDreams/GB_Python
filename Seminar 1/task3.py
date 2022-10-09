@@ -9,9 +9,11 @@ for i in range(-num, num + 1):
 print()
 
 # Упрощаем
+num = int(input("Введите число: "))
 print(*[i for i in range(-num, num + 1)])
 
 # Ещё упрощаем
+num = int(input("Введите число: "))
 print(*range(-num, num + 1))
 
 # Применяем "моржовый оператор"
