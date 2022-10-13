@@ -52,3 +52,21 @@ while num != 0:
     num_sum += num % 10
     num //= 10
 print(num_sum)
+
+# Вариант через Decimal
+from decimal import *
+
+num = Decimal(12.345)
+getcontext().prec = 10
+
+while True:
+    if num % 10 != 0:
+        num *= 10
+    else:
+        num = int(num // 10)
+        break
+num_sum = 0
+while num != 0:
+    num_sum += num % 10
+    num //= 10
+print(num_sum)
