@@ -5,5 +5,7 @@ str_list = ['a1b2c3', 'q11w22e33', 'z123x234c345']
 num = input("Введите число для поиска: ")
 for i in str_list:
     if num in i:
-        print(f"Число {num} присутствует в строке {i}")
-
+        print(f"Число {num} присутствует")
+        break
+else:
+    print("Число  не найдено")

@@ -16,3 +16,14 @@ lst4 = ["123", "234", 123, "567"]
 srch4 = "123"
 lst5 = []
 srch5 = "123"
+
+if srch1 in lst3:
+    ind = lst3.index(srch3)
+    for i in range(ind + 1, len(lst3)):
+        if lst3[i] == srch3:
+            print(i)
+            break
+    else:
+        print(-1)
+else:
+    print(-1)
