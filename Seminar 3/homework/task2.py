@@ -7,8 +7,8 @@ from random import randint
 
 num = int(input("Введите количество элементов: "))
 num_list = [randint(-num, num) for _ in range(num)]
-prod_list = [num_list[i] * num_list[-i - 1] for i in range(num // 2)]
-if num % 2 != 0:
-    prod_list.append(num_list[num // 2] ** 2)
+prod_list = [num_list[i] * num_list[-i - 1] for i in range((num + 1) // 2)]
+# if num % 2 != 0:
+#     prod_list.append(num_list[num // 2] ** 2)
 print(f"Исходный список: {num_list}\n"
       f"Список пар чисел: {prod_list}")
