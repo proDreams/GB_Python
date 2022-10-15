@@ -42,3 +42,22 @@ fib_num = int(input("Введите число: "))
 fib_list = [0, 1]
 fib_list = fibonacci(fib_num, fib_list)
 print(fib_list)
+
+
+# Чуть проще
+def fibonacci(fib, start):
+    result = start
+    for i in range(2, fib + 1):
+        if i % 2 == 0:
+            result.append(result[-2] + result[-1])
+            result.insert(0, -result[-1])
+        else:
+            result.append(result[-2] + result[-1])
+            result.insert(0, result[-1])
+    return result
+
+
+fib_num = int(input("Введите число: "))
+fib_list = [1, 0, 1]
+fib_list = fibonacci(fib_num, fib_list)
+print(fib_list)
