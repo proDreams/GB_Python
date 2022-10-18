@@ -12,7 +12,6 @@ def bin_octa(num, prod):
         num //= prod
     return result
 
-
 def hexa(num):
     result = ''
     alp = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
