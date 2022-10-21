@@ -7,7 +7,7 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, '''Добро пожаловать в игру с конфетами!
+    hello = bot.send_message(message.chat.id, '''Добро пожаловать в игру с конфетами!
 Правила игры:
 На столе лежит 2021 конфета.
 Играют два игрока делая ход друг после друга.
@@ -16,11 +16,20 @@ def start_message(message):
 Все конфеты оппонента достаются сделавшему последний ход.
 ''')
     bot.send_message(message.chat.id, 'Введите количество конфет: ')
-    candy_count = message.text
-    bot.send_message(message.chat.id, f'{candy_count}')
+    bot.register_next_step_handler(hello, candy_count_req)
 
 
-# can_take_candy = int(input('Введите максимальное количество конфет за ход: '))
+def candy_count_req(message):
+    candy_count = int(message.text)
+    bot.send_message(message.chat.id, 'Введите максимальное количество конфет за ход: ')
+    bot.register_next_step_handler(candy_count, candy_count_req)
+
+
+def can_take_candy_req(message):
+    can_take_candy = int(message.text)
+
+
+#
 # players = int(input('Выберете режим игры:\n'
 #                     '1. С Искусственным-недоинтеллектом\n'
 #                     '2. Два игрока\n'))
