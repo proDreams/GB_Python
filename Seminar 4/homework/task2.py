@@ -1,6 +1,7 @@
 # Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
 import time
 
+
 def check_prime(number, lst):
     if number in lst:
         return True
@@ -11,7 +12,6 @@ def check_prime(number, lst):
         if number not in lst:
             lst.append(number)
         return True
-
 
 
 numb = int(input("Введите число: "))
@@ -28,5 +28,5 @@ while num != 1:
     else:
         div += 1
 print(f"Число {numb} имеет следующие простые множители: {prime_set}")
-end = time.time() 
+end = time.time()
 print(end - start)
