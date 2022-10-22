@@ -10,6 +10,7 @@ player_two_name = 'Искусственный-недоинтеллект'
 current_take = 0
 player_turn = 1
 turn = 1
+current_player = player_one_name
 
 
 @bot.message_handler(commands=['start'])
@@ -47,15 +48,12 @@ def play(message):
     coin = choice(['Орёл', 'Решка'])
     if coin == 'Орёл':
         bot.send_message(message.chat.id, f'Выпал Орёл, первым ходит {player_one_name}')
-        bot.send_message(message.chat.id, f'В банке с конфетами: {candy_count}')
-        bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
-        bot.register_next_step_handler(message, play_process)
     else:
         player_one_name, player_two_name = player_two_name, player_one_name
         bot.send_message(message.chat.id, f'Выпала Решка, первым ходит {player_one_name}')
-        bot.send_message(message.chat.id, f'В банке с конфетами: {candy_count}')
-        bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
-        bot.register_next_step_handler(message, play_process)
+    bot.send_message(message.chat.id, f'В банке с конфетами: {candy_count}')
+    bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
+    bot.register_next_step_handler(message, play_process)
 
 
 def play_process(message):
@@ -63,29 +61,29 @@ def play_process(message):
     global player_turn
     global turn
     global can_take_candy
+    global current_player
     if candy_count > 0:
-        if turn == 1:
-            player_turn = player_one_name
-            player_take = check_take(message)
-            bot.send_message(message.chat.id, f'Игрок {player_one_name} забирает из банки {player_take}')
-            candy_count -= player_take
-            bot.send_message(message.chat.id, f'В банке осталось конфет: {candy_count}')
-            bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
-            turn = 2
-            bot.register_next_step_handler(message, play_process)
-        else:
-            player_turn = player_two_name
-            player_take = check_take(message)
-            bot.send_message(message.chat.id, f'Игрок {player_two_name} забирает из банки {player_take}')
-            candy_count -= player_take
-            bot.send_message(message.chat.id, f'В банке осталось конфет: {candy_count}')
-            bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
-            turn = 1
-            bot.register_next_step_handler(message, play_process)
+        player_take = check_take(message)
+        bot.send_message(message.chat.id, f'Игрок {current_player} забирает из банки {player_take}')
+        candy_count -= player_take
+        bot.send_message(message.chat.id, f'В банке осталось конфет: {candy_count}')
+        change_current_player()
+        bot.register_next_step_handler(message, play_process)
     elif turn == 2:
         bot.send_message(message.chat.id, f'Победил игрок {player_one_name}! Поздравляем!')
     else:
         bot.send_message(message.chat.id, f'Победил игрок {player_two_name}! Поздравляем!')
+
+
+def change_current_player():
+    global turn
+    global current_player
+    if turn == 1:
+        turn = 2
+        current_player = player_two_name
+    else:
+        turn = 1
+        current_player = player_one_name
 
 
 def check_take(message):
@@ -96,6 +94,7 @@ def check_take(message):
     if player_turn == 'Искусственный-недоинтеллект':
         current_take = randint(1, can_take_candy)
     else:
+        bot.send_message(message.chat.id, f'Введите количество конфет от 1 до {can_take_candy}: ')
         current_take = int(message.text)
     if can_take_candy < current_take:
         bot.send_message(message.chat.id, 'Ошибка, вы ввели неверное количество конфет, попробуйте снова!')
