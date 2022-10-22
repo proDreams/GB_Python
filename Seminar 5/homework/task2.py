@@ -73,7 +73,7 @@ print('''
 ''')
 candy_count = int(input('Введите количество конфет: '))
 can_take_candy = int(input('Введите максимальное количество конфет за ход: '))
-players = int(input('Выберете режим игры:\n'
-                    '1. С Искусственным-недоинтеллектом\n'
-                    '2. Два игрока\n'))
-play(candy_count, can_take_candy, players)
+mode = int(input('Выберете режим игры:\n'
+                 '1. С Искусственным-недоинтеллектом\n'
+                 '2. Два игрока\n'))
+play(candy_count, can_take_candy, mode)
