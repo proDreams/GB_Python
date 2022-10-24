@@ -6,7 +6,7 @@
 # Все конфеты оппонента достаются сделавшему последний ход.
 # Сколько конфет нужно взять первому игроку, чтобы забрать все конфеты у своего конкурента?
 # a) Добавьте игру против бота
-# b) Подумайте как наделить бота "интеллектом"
+# b) Подумайте как наделить бота "интеллектом" ;было 70 строк
 from random import choice, randint
 
 
@@ -24,22 +24,19 @@ def check_take(count, max_take, player):
             return num
 
 
-def play_process(count, max_take, player_one, player_two):
-    turn = 1
+def play_process(count, max_take, player_one, player_two, turn):
     print(f'В банке с конфетами: {count}')
     while count > 0:
         if turn == 1:
             player_take = check_take(count, max_take, player_one)
             print(f'Игрок {player_one} забирает из банки {player_take}')
-            count -= player_take
-            print(f'В банке осталось конфет: {count}')
             turn = 2
         else:
             player_take = check_take(count, max_take, player_two)
             print(f'Игрок {player_two} забирает из банки {player_take}')
-            count -= player_take
-            print(f'В банке осталось конфет: {count}')
             turn = 1
+        count -= player_take
+        print(f'В банке осталось конфет: {count}')
         print()
     return turn
 
@@ -53,10 +50,11 @@ def play(count, max_take, players):
     coin = choice(['Орёл', 'Решка'])
     if coin == 'Орёл':
         print(f'Выпал Орёл, первым ходит {player_one_name}')
+        turn = 1
     else:
-        player_one_name, player_two_name = player_two_name, player_one_name
         print(f'Выпала Решка, первым ходит {player_one_name}')
-    if play_process(count, max_take, player_one_name, player_two_name) == 2:
+        turn = 2
+    if play_process(count, max_take, player_one_name, player_two_name, turn) == 2:
         print(f'Победил игрок \033[1m{player_one_name}\033[0m! Поздравляем!')
     else:
         print(f'Победил игрок \033[1m{player_two_name}\033[0m! Поздравляем!')
