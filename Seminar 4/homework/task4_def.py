@@ -5,7 +5,7 @@ def generate_expr(k, t):
     result = ''
     result2 = []
     while k >= 0:
-        rand = randint(0, 100)
+        rand = randint(0, 10)
         if k == 1:
             k_op = 'x'
         else:
@@ -37,6 +37,6 @@ def create_expr(coeff):
             result += f'{coef}{k_op}' + ' + '
         elif coef == 1:
             result += f'{k_op}' + ' + '
-        else:
-            result += f'{coef} = 0'
-    return result
+        elif coef == 0:
+            continue
+    return result + f'{coeff[-2]} = 0'

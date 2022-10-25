@@ -22,3 +22,4 @@ for i in range(len(exp_1)):
 print(f'Первый многочлен: {create_expr(fst)}\n'
       f'Второй многочлен: {create_expr(snd)}\n'
       f'Сумма многочленов: {create_expr(result)}')
+
