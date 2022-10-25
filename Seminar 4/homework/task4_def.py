@@ -36,7 +36,7 @@ def create_expr(coeff):
         if coef > 1 and k != 0:
             result += f'{coef}{k_op}' + ' + '
         elif coef == 1:
-            result += f'{coef}' + ' + '
+            result += f'{k_op}' + ' + '
         else:
             result += f'{coef} = 0'
     return result
