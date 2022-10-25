@@ -24,16 +24,16 @@ def check_take(count, max_take, player):
             return num
 
 
-def play_process(count, max_take, player_one, player_two, turn):
+def play_process(count, max_take, player_one, player_two, turn, current_player):
     print(f'В банке с конфетами: {count}')
     while count > 0:
-        if turn == 1:
-            player_take = check_take(count, max_take, player_one)
-            print(f'Игрок {player_one} забирает из банки {player_take}')
+        player_take = check_take(count, max_take, current_player)
+        print(f'Игрок {current_player} забирает из банки {player_take}')
+        if current_player == player_one:
+            current_player = player_two
             turn = 2
         else:
-            player_take = check_take(count, max_take, player_two)
-            print(f'Игрок {player_two} забирает из банки {player_take}')
+            current_player = player_one
             turn = 1
         count -= player_take
         print(f'В банке осталось конфет: {count}')
@@ -47,14 +47,17 @@ def play(count, max_take, players):
         player_two_name = input('Введите имя второго игрока: ')
     else:
         player_two_name = 'Искусственный-недоинтеллект'
+    current_player = player_one_name
     coin = choice(['Орёл', 'Решка'])
     if coin == 'Орёл':
         print(f'Выпал Орёл, первым ходит {player_one_name}')
+        current_player = player_one_name
         turn = 1
     else:
-        print(f'Выпала Решка, первым ходит {player_one_name}')
+        print(f'Выпала Решка, первым ходит {player_two_name}')
+        current_player = player_two_name
         turn = 2
-    if play_process(count, max_take, player_one_name, player_two_name, turn) == 2:
+    if play_process(count, max_take, player_one_name, player_two_name, turn, current_player) == 2:
         print(f'Победил игрок \033[1m{player_one_name}\033[0m! Поздравляем!')
     else:
         print(f'Победил игрок \033[1m{player_two_name}\033[0m! Поздравляем!')

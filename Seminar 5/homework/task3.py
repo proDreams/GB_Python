@@ -11,7 +11,7 @@ def create_board(size):
     return board_matrix
 
 
-def fill_turn(player_turn, game_board):
+# def fill_turn(player_turn, game_board):
 
 
 def print_board(board_matrix):
@@ -37,7 +37,7 @@ def start_game(mode, game_board, size):
     play_process(player_one_name, player_two_name, turn, game_board, size)
 
 
-def get_turn(player_name, size)
+def get_turn(player_name, size):
     while True:
         player_turn = input(f'Ход игрока {player_name}\n'
                             f'Введите координату хода в виде, например a2\n'
@@ -61,12 +61,13 @@ def play_process(player_one_name, player_two_name, turn, game_board):
 
 while True:
     board_size = int(input("Введите размер доски (3, 5, 7): "))
-    if board_size != 3 or board_size != 5 or board_size != 7:
-        print('Ошибка, неверный размер доски!\n')
-    else:
+    if board_size == 3 or board_size == 5 or board_size == 7:
         break
+    else:
+        print('Ошибка, неверный размер доски!\n')
 game_mode = int(input("1. Игра против бота\n"
                       "2. Игра для двух человек\n"
                       "Выберите режим игры: "))
 board = create_board(board_size)
+print_board(board)
 start_game(game_mode, board, board_size)
