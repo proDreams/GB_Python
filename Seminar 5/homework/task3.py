@@ -11,7 +11,11 @@ def create_board(size):
     return board_matrix
 
 
-# def fill_turn(player_turn, game_board):
+def fill_turn(player_turn, game_board, turn):
+    if turn == 1:
+        game_board[player_turn[0]][player_turn[1]] = 'X'
+    else:
+        game_board[player_turn[0]][player_turn[1]] = 'O'
 
 
 def print_board(board_matrix):
@@ -37,26 +41,61 @@ def start_game(mode, game_board, size):
     play_process(player_one_name, player_two_name, turn, game_board, size)
 
 
-def get_turn(player_name, size):
+def get_turn(player_name, size, game_board):
     while True:
         player_turn = input(f'Ход игрока {player_name}\n'
-                            f'Введите координату хода в виде, например a2\n'
-                            f'Где буква = строка, а цифра = столбец: ').split()
+                            f'Введите координату хода в виде, например A2\n'
+                            f'Где буква = строка, а цифра = столбец: ')
         if player_turn[0].isalpha() and player_turn[1].isdigit():
-            if ord(player_turn[0]) - 64 > size or player_turn[1] > size:
+            if ord(player_turn[0]) - 64 > size or int(player_turn[1]) > size:
                 print('Ошибка! Введена неверная координата!')
             else:
-                return player_turn
+                if game_board[ord(player_turn[0]) - 64][int(player_turn[1])] == 'X' or \
+                        game_board[ord(player_turn[0]) - 64][int(player_turn[1])] == 'O':
+                    print('Ошибка! Координата уже введена!')
+                else:
+                    return ord(player_turn[0]) - 64, int(player_turn[1])
         else:
             print('Ошибка! Введена неверная координата!')
 
 
-def play_process(player_one_name, player_two_name, turn, game_board):
+def check_win(player_one_turns, player_two_turns, size, game_board):
+    flag = 'AAA'
+    if len(player_one_turns) + len(player_two_turns) >= size:
+        for i in player_one_turns, player_two_turns:
+            for j in i:
+                if game_board[j[0]][j[1]] == (game_board[j[0] - 1][j[1]]) == (
+                        game_board[j[0] + 1][j[1]]):
+                    return game_board[j[0]][j[1]]
+    # if player_two_turns >= size and flag == 0:
+    #
+    # else:
+    return flag
+
+
+def play_process(player_one_name, player_two_name, turn, game_board, size):
     print_board(game_board)
+    player_one_turns = []
+    player_two_turns = []
     while True:
         if turn == 1:
-            player_turn = get_turn(player_one_name, size)
-            fill_turn(player_turn, game_board)
+            player_turn = get_turn(player_one_name, size, game_board)
+            player_one_turns.append(player_turn)
+            fill_turn(player_turn, game_board, turn)
+            turn = 2
+        elif turn == 2:
+            player_turn = get_turn(player_two_name, size, game_board)
+            player_two_turns.append(player_turn)
+            fill_turn(player_turn, game_board, turn)
+            turn = 1
+        print_board(board)
+        winner = check_win(player_one_turns, player_two_turns, size, game_board)
+        if winner == 'X':
+            print(f'Победил игрок {player_one_name}')
+            break
+        elif winner == 'O':
+            print(f'Победил игрок {player_two_name}')
+            break
 
 
 while True:

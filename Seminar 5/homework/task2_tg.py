@@ -1,3 +1,5 @@
+# Не допилен. Требуется перепиливание. Когда-нибудь.
+
 from random import choice, randint
 import telebot
 
@@ -79,9 +81,9 @@ def play_process(message):
         bot.send_message(message.chat.id, f'В банке осталось конфет: {candy_count}')
 
         else:
-            finish(message)
-        change_current_player()
-        bot.register_next_step_handler(message, play_process)
+        finish(message)
+    change_current_player()
+    bot.register_next_step_handler(message, play_process)
 
 
 def change_current_player():
