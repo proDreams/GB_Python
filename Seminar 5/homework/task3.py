@@ -25,12 +25,9 @@ def print_board(board_matrix):
         print()
 
 
-def start_game(mode, game_board, size):
+def start_game(game_board, size):
     player_one_name = input('Введите имя первого игрока: ')
-    if mode == 2:
-        player_two_name = input('Введите имя второго игрока: ')
-    else:
-        player_two_name = 'Искусственный-недоинтеллект'
+    player_two_name = input('Введите имя второго игрока: ')
     coin = choice(['Орёл', 'Решка'])
     if coin == 'Орёл':
         print(f'Выпал Орёл, первым ходит {player_one_name}')
@@ -65,11 +62,17 @@ def check_win(player_one_turns, player_two_turns, size, game_board):
         for i in player_one_turns, player_two_turns:
             for j in i:
                 if game_board[j[0]][j[1]] == (game_board[j[0] - 1][j[1]]) == (
-                        game_board[j[0] + 1][j[1]]):
+                        game_board[j[0] + 1][j[1]] if j[0] + 1 <= size else False):
                     return game_board[j[0]][j[1]]
-    # if player_two_turns >= size and flag == 0:
-    #
-    # else:
+                elif game_board[j[0]][j[1]] == (game_board[j[0]][j[1] - 1]) == (
+                        game_board[j[0]][j[1] + 1]):
+                    return game_board[j[0]][j[1]]
+                elif game_board[j[0]][j[1]] == (game_board[j[0] - 1][j[1] - 1]) == (
+                        game_board[j[0] + 1][j[1] + 1] if j[1] + 1 <= size else False):
+                    return game_board[j[0]][j[1]]
+                elif game_board[j[0]][j[1]] == (game_board[j[0] + 1][j[1] - 1]) == (
+                        game_board[j[0] - 1][j[1] + 1] if j[1] + 1 <= size else False):
+                    return game_board[j[0]][j[1]]
     return flag
 
 
@@ -98,15 +101,10 @@ def play_process(player_one_name, player_two_name, turn, game_board, size):
             break
 
 
-while True:
-    board_size = int(input("Введите размер доски (3, 5, 7): "))
-    if board_size == 3 or board_size == 5 or board_size == 7:
-        break
-    else:
-        print('Ошибка, неверный размер доски!\n')
-game_mode = int(input("1. Игра против бота\n"
-                      "2. Игра для двух человек\n"
-                      "Выберите режим игры: "))
+print('''
+\033[1mДобро пожаловать в игру крестики-нолики!\033[0m
+''')
+board_size = 3
 board = create_board(board_size)
 print_board(board)
-start_game(game_mode, board, board_size)
+start_game(board, board_size)
