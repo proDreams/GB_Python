@@ -1,12 +1,12 @@
 # Всё херня!
 import os.path
 
-with open('task4_zip_input.txt', 'rb') as input_file:
+with open('../task4_zip_input.txt', 'rb') as input_file:
     input_data = input_file.readlines()[0]
 print(f'Исходная строка: {input_data}\n'
-      f'Размер файла {os.path.getsize("task4_zip_input.txt")} байт')
+      f'Размер файла {os.path.getsize("../task4_zip_input.txt")} байт')
 
-with open('task4_output.txt', 'w', encoding='utf-8') as output_file:
+with open('../task4_output.txt', 'w', encoding='utf-8') as output_file:
     result = [[], []]
     count = 0
     while True:
@@ -23,4 +23,4 @@ with open('task4_output.txt', 'w', encoding='utf-8') as output_file:
             break
     output_file.write(f'{result}')
 print(f'Сжатая строка: {result}\n'
-      f'Размер файла {os.path.getsize("task4_output.txt")} байт')
+      f'Размер файла {os.path.getsize("../task4_output.txt")} байт')
