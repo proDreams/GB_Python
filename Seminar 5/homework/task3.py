@@ -49,7 +49,7 @@ def get_turn(player_name, size, game_board):
             else:
                 if game_board[ord(player_turn[0]) - 64][int(player_turn[1])] == 'X' or \
                         game_board[ord(player_turn[0]) - 64][int(player_turn[1])] == 'O':
-                    print('Ошибка! Координата уже введена!')
+                    print('Ошибка! Координата уже занята!')
                 else:
                     return ord(player_turn[0]) - 64, int(player_turn[1])
         else:
@@ -104,7 +104,7 @@ def play_process(player_one_name, player_two_name, turn, game_board, size):
 print('''
 \033[1mДобро пожаловать в игру крестики-нолики!\033[0m
 ''')
-board_size = 7
+board_size = 3
 board = create_board(board_size)
 print_board(board)
 start_game(board, board_size)

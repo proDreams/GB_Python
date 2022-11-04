@@ -47,7 +47,6 @@ def play(count, max_take, players):
         player_two_name = input('Введите имя второго игрока: ')
     else:
         player_two_name = 'Искусственный-недоинтеллект'
-    current_player = player_one_name
     coin = choice(['Орёл', 'Решка'])
     if coin == 'Орёл':
         print(f'Выпал Орёл, первым ходит {player_one_name}')
