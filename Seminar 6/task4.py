@@ -11,7 +11,7 @@ with open('task1_output.txt', 'w', encoding='utf-8') as output_file:
             if letter not in data.lower():
                 output_file.write(data)
                 break
-exit()
+
 # Вариант когда слова одной строкой
 with open('task1_input2.txt', 'r', encoding='utf-8') as input_file:
     input_data = input_file.readlines()
