@@ -54,7 +54,7 @@ def calc(num, op):
     return num
 
 
-input_text = '-5 * 6'
+input_text = input('Введите выражение для вычисления: ')
 while ')' in input_text:
     right = input_text.find(')')
     left = input_text[:right].rfind('(')
