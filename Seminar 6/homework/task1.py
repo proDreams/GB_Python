@@ -41,7 +41,7 @@ def calc(num, op):
             if op[prod_div] == '*':
                 temp = num[prod_div] * num[prod_div + 1]
             elif op[prod_div] == '/':
-                if num[prod_div] == 0 or num[prod_div + 1] == 0:
+                if num[prod_div + 1] == 0:
                     print('Выражение не имеет решений.')
                     exit()
                 temp = num[prod_div] / num[prod_div + 1]
