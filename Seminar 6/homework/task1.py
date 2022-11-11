@@ -20,6 +20,9 @@ def create_lists(text):
     for i in text:
         if i.isdigit() or i == '.':
             num += i
+        elif i == '-':
+            num += ' ' + i
+            op += '+'
         elif i == ' ':
             continue
         else:
@@ -33,24 +36,26 @@ def calc(num, op):
         temp = 0
         prod_div = min(op.index('*') if '*' in op else len(op),
                        op.index('/') if '/' in op else len(op))
-        add_sub = min(op.index('-') if '-' in op else len(op),
-                      op.index('+') if '+' in op else len(op))
+        add = op.index('+') if '+' in op else len(op)
         if prod_div != len(op):
             if op[prod_div] == '*':
                 temp = num[prod_div] * num[prod_div + 1]
             elif op[prod_div] == '/':
+                if num[prod_div] == 0 or num[prod_div + 1] == 0:
+                    print('Выражение не имеет решений.')
+                    exit()
                 temp = num[prod_div] / num[prod_div + 1]
             del num[prod_div]
             num[prod_div] = temp
             del op[prod_div]
-        elif add_sub != len(op):
-            if op[add_sub] == '+':
-                temp = num[add_sub] + num[add_sub + 1]
-            elif op[add_sub] == '-':
-                temp = num[add_sub] - num[add_sub + 1]
-            del num[add_sub]
-            num[add_sub] = temp
-            del op[add_sub]
+        elif add != len(op):
+            if op[add] == '+':
+                temp = num[add] + num[add + 1]
+            elif op[add] == '-':
+                temp = num[add] - num[add + 1]
+            del num[add]
+            num[add] = temp
+            del op[add]
     return num
 
 
