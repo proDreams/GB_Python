@@ -11,6 +11,7 @@
 # Очевиднейший вариант.
 # print(eval(input('Введите выражение: ')))
 #################################################################################
+import sys
 from decimal import Decimal
 
 
@@ -33,28 +34,23 @@ def create_lists(text):
 
 def calc(num, op):
     while len(num) > 1:
-        temp = 0
         prod_div = min(op.index('*') if '*' in op else len(op),
                        op.index('/') if '/' in op else len(op))
         add = op.index('+') if '+' in op else len(op)
         if prod_div != len(op):
             if op[prod_div] == '*':
-                temp = num[prod_div] * num[prod_div + 1]
+                num[prod_div] = num[prod_div] * num[prod_div + 1]
             elif op[prod_div] == '/':
                 if num[prod_div + 1] == 0:
                     print('Выражение не имеет решений.')
-                    exit()
-                temp = num[prod_div] / num[prod_div + 1]
-            del num[prod_div]
-            num[prod_div] = temp
+                    sys.exit()
+                num[prod_div] = num[prod_div] / num[prod_div + 1]
+            del num[prod_div + 1]
             del op[prod_div]
-        elif add != len(op):
+        else:
             if op[add] == '+':
-                temp = num[add] + num[add + 1]
-            elif op[add] == '-':
-                temp = num[add] - num[add + 1]
-            del num[add]
-            num[add] = temp
+                num[add] = num[add] + num[add + 1]
+            del num[add + 1]
             del op[add]
     return num
 

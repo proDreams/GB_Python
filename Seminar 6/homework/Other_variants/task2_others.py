@@ -1,7 +1,7 @@
 from random import randint
 
-lst = [randint(1, 10) for _ in range(10)]
-# lst = [1, 2, 3, 5, 1, 5, 3, 10]
+# lst = [randint(1, 10) for _ in range(10)]
+lst = [1, 2, 3, 5, 1, 5, 3, 10]
 
 ####################
 # Вариант первый.
